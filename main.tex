@@ -16,10 +16,37 @@
 \usepackage[reftex]{theoremref}
 \usetikzlibrary{shapes, arrows}
 \usetikzlibrary{shapes.geometric}
-
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
 
 \usepackage{float}
-
+\usepackage{listings}
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=mystyle}
 
 \usepackage[margin=1in,heightrounded]{geometry}
 \geometry{headsep=33pt}
@@ -184,6 +211,7 @@
 
 %Begin the stuff!
 %This version of the template has some placeholder stuff so you can see what it looks like
-\subfile{1/1}
-\subfile{2/2.tex}
+\subfile{sections/controlSystem/1.tex}
+\subfile{sections/programming/2.tex}
+\subfile{sections/vision/1.tex}
 \end{document}
