@@ -28,7 +28,7 @@ We do not have example code for using a PixyCam, since we have never used it on 
 \includegraphics[width=400pt]{sections/vision/images/2019-02-27-195334_3840x1080_scrot_cropped.png}
 
 \subsection{Tensorflow}
-Tensorflow is an interesting vision system. The premise is this; there is some neural network trained to identify different pieces present in the game. This was first done in the Rover Ruckus season, as since I am currently writing this while that season takes place, I don't know whether it will be done again, as FTC trained the model to detect the minerals themselves. It is something you could do yourself, TODO: GET TANAY TO TALK ABOUT THIS PART
+Tensorflow is an interesting vision system. The premise is this; there is some neural network trained to identify different pieces present in the game. This was first done in the Rover Ruckus season, as since I am currently writing this while that season takes place, I don't know whether it will be done again, as FTC trained the model to detect the minerals themselves. It is something you could do yourself, see subsection 3.6 DIY Neural Network. 
 \begin{figure}[H]
     \includegraphics[width=400pt]{sections/vision/images/tensorflowOutput.png}
     \caption{Sample output of the Tensorflow. Each object that it believes to be a trained object, in this case the minerals, is boxed. Next to each box is a number, representing how confident the neural network is that the box is a mineral. In the FTC SDK, methods for getting the location of the box, confidence, and type of identified object the box contains are exposed}
@@ -40,5 +40,18 @@ For now, assume that \verb|tfod| is a standard Tensorflow object provided by the
 
 \begin{lstlisting}[language=Java]
 \end{lstlisting}
+
+\subsection{DIY Neural Network}
+A quick disclaimer before we get into this section, this will method for vision will take a long time (and if you do not have a GPU, even longer), so only use it if nothing is working. It requires a lot of patience and a lot of StackOverflow tabs to be opened, but if you really want to do it go for it. In order to train, you need to atleast have python installed.
+
+The specific algorithm you will have to use is called YOLO object detection. In short, it takes in continuous video and splits the frame into a bunch of little rectangles and trys to find whatever you are looking for in those little rectangles. If it finds it, it'll but an little box around it. 
+
+The first part of this method is to find find and annotate your dataset. Look around the internet or take some pictures and start to gather a dataset. Once you have your data, you have to start annotating. In order to annotate these images, you will need to use LabelImg. LabelImg makes the annotations in a way that the neural network can understand it (a.k.a. makes xml files). You can find LabelImg  \href{https://github.com/tzutalin/labelImg}{here}.
+
+\begin{figure}[H]
+    \includegraphics[width=400pt]{sections/vision/images/LabelImg.png}
+    \caption{Sample screencap of labelling the images.}
+\end{figure}
+
 \subsection{OpenCV}
 \end{document}
