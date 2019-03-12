@@ -6,14 +6,14 @@
 \newpage
 %Begin the stuff!
 %This version of the template has some placeholder stuff so you can see what it looks like
-\section{Vision}
+\part{Vision}
 While this really should go under sensors, it is a big enough category to warrant a section for itself.
 
-\subsection{What is it}
+\section{What is it}
 We have previously discussed various sensors. However, the limitation inherent with all of them is the fact that they are all highly specialized with specific target ranges. The primary advantage of vision systems is that they offer a much larger range of view.
-\subsection{OK but why do I need it}
-\subsection{Vuforia}
-\subsection{PixyCam}
+\section{OK but why do I need it}
+\section{Vuforia}
+\section{PixyCam}
 \begin{figure}[H]
     \includegraphics{sections/vision/images/pixy.png}
     \caption{A PixyCam, so you know what it looks like.}
@@ -24,10 +24,10 @@ TOOD: Insert some pictures of the training thing here. Requires using a pixy
 
 We do not have example code for using a PixyCam, since we have never used it on our robot. This is for a couple of reasons. The first of which is that PixyCam is INCREDIBLY susceptible to lighting changes. It is highly likely that on competition day your settings will not work, depending on the lighting conditions at the meet. The second is that even when under proper settings, it isn't that great. It uses RGB, which is not the greatest for color detection. It has tons of false positives and noise, and all around isn't great. It works best on bright colors - the particles/jewels from Velocity Vortex/Relic Recovery, the relic from Relic Recovery, and the gold mineral from Rover Ruckus would work well. The glyphs from Relic Recovery worked horribly. 
 
-\subsubsection{TL;DR}
+\subsection{TL;DR}
 \includegraphics[width=400pt]{sections/vision/images/2019-02-27-195334_3840x1080_scrot_cropped.png}
 
-\subsection{Tensorflow}
+\section{Tensorflow}
 Tensorflow is an interesting vision system. The premise is this; there is some neural network trained to identify different pieces present in the game. This was first done in the Rover Ruckus season, as since I am currently writing this while that season takes place, I don't know whether it will be done again, as FTC trained the model to detect the minerals themselves. It is something you could do yourself, see subsection 3.6 DIY Neural Network. 
 \begin{figure}[H]
     \includegraphics[width=400pt]{sections/vision/images/tensorflowOutput.png}
@@ -41,7 +41,7 @@ For now, assume that \verb|tfod| is a standard Tensorflow object provided by the
 \begin{lstlisting}[language=Java]
 \end{lstlisting}
 
-\subsection{DIY Neural Network}
+\section{DIY Neural Network}
 A quick disclaimer before we get into this section, this will method for vision will take a long time (and if you do not have a GPU, even longer), so only use it if nothing is working. It requires a lot of patience and a lot of StackOverflow tabs to be opened, but if you really want to do it go for it. In order to train, you need to atleast have python installed.
 
 The specific algorithm you will have to use is called YOLO object detection. In short, it takes in continuous video and splits the frame into a bunch of little rectangles and trys to find whatever you are looking for in those little rectangles. If it finds it, it'll but an little box around it. 
@@ -53,5 +53,5 @@ The first part of this method is to find find and annotate your dataset. Look ar
     \caption{Sample screencap of labelling the images.}
 \end{figure}
 
-\subsection{OpenCV}
+\section{OpenCV}
 \end{document}

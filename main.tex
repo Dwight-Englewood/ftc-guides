@@ -1,4 +1,4 @@
-\documentclass[12pt,reqno]{amsart}
+\documentclass[12pt,reqno,toc=sectionentrywithdots,toc=indent]{article}
 
 %Below are some necessary packages for your course.
 \usepackage{amsfonts,latexsym,amsthm,amssymb,amsmath,amscd,euscript}
@@ -21,7 +21,14 @@
 
 \usepackage{float}
 \usepackage{listings}
- 
+\usepackage{titletoc,tocloft}
+\setlength{\cftsubsecindent}{1cm}
+\setlength{\cftsubsubsecindent}{2cm}
+%\dottedcontents{section}[3.8em]{}{2.3em}{1pc}
+%\dottedcontents{subsection}[6.1em]{}{3.2em}{1pc}
+
+
+%\setlength{\cftsecindent}{2cm}
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
@@ -100,46 +107,9 @@
   %{\normalfont\itshape}}
 %Explanation of \@startsection is at http://infohost.nmt.edu/tcc/help/pubs/nmtthesis/old/annotated/at.startsection.html
 
-\def\section{\@startsection{section}{1}%
-  \z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
-  {\normalfont\Large\bfseries}}%{\normalfont\Large\bfseries\scshape\centering}} % full range of options tested
-\def\subsection{\@startsection{subsection}{2}%
-  \z@{.5\linespacing\@plus.7\linespacing}{.5\linespacing}%
-  {\normalfont\large\bfseries}}
-\def\subsubsection{\@startsection{subsubsection}{3}%
-  \z@{.5\linespacing\@plus.7\linespacing}{.5\linespacing}%
-  {\normalfont\bfseries}}
-% the following is with thanks to https://tex.stackexchange.com/questions/51760/table-of-contents-with-indents-and-dots
-\def\@tocline#1#2#3#4#5#6#7{\relax
-  \ifnum #1>\c@tocdepth % then omit
-  \else
-    \par \addpenalty\@secpenalty\addvspace{#2}%
-    \begingroup \hyphenpenalty\@M
-    \@ifempty{#4}{%
-      \@tempdima\csname r@tocindent\number#1\endcsname\relax
-    }{%
-      \@tempdima#4\relax
-    }%
-    \parindent\z@ \leftskip#3\relax \advance\leftskip\@tempdima\relax
-    \rightskip\@pnumwidth plus4em \parfillskip-\@pnumwidth
-    #5\leavevmode\hskip-\@tempdima
-      \ifcase #1
-       \or\or \hskip 1em \or \hskip 2em \else \hskip 3em \fi%
-      #6\nobreak\relax
-    \dotfill\hbox to\@pnumwidth{\@tocpagenum{#7}}\par
-    \nobreak
-    \endgroup
-  \fi}
-\makeatother
-%Below are the theorem, definition, example, lemma, etc. body types.
 
 % Create some custom enviornments, with colors.
-\newenvironment{statement}[1]{\color{zaffre} \setcounter{justification}{0}\setcounter{equation}{0}\begin{exercise}[#1]}{\color[rgb]{0,0,0}\end{exercise}}
 \newenvironment{theorem_blue}{\color{zaffre}\begin{theorem}}{\color[rgb]{0,0,0}\end{theorem}}
-\newenvironment{just_c}{\color{aurometalsaurus}\begin{justification}}{\color[rgb]{0,0,0}\end{justification}}
-\newenvironment{defn_c}{\color{darktealblue}\begin{defn}}{\color[rgb]{0,0,0}\end{defn}}
-\newenvironment{uf}{\color{OliveGreen}\begin{usefulfacts}}{\color[rgb]{0,0,0}\end{usefulfacts}}
-\newenvironment{solution}{~\newline\textit{Solution.}}{}
 
 %Math 55 Originals
 \newtheoremstyle{break}
@@ -148,44 +118,9 @@
   {\bfseries}{}%
   {\newline}{}%
 \theoremstyle{break}
-\newtheorem{justification}{Justification}
 \newtheorem{theorem}{Theorem}[subsection]
-\newtheorem{exercise}{Exercise}[subsection]
-\newtheorem*{proposition}{Proposition}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{conjecture}[theorem]{Conjecture}
-\newtheorem{postulate}[theorem]{Postulate}
-\newtheorem{usefulfacts}[theorem]{Useful Facts}
-\newtheorem{defn}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-
-\theoremstyle{remark}
-\newtheorem{remark}{Remark}
-\newtheorem*{notation}{Notation}
-\newtheorem*{note}{Note}
-
-% Shortcuts for common blackboard letters and such that, for inside math mode
-\newcommand{\BR}{\mathbb R}
-\newcommand{\BC}{\mathbb C}
-\newcommand{\BF}{\mathbb F}
-\newcommand{\BQ}{\mathbb Q}
-\newcommand{\BZ}{\mathbb Z}
-\newcommand{\BN}{\mathbb N}
-\newcommand{\kernel}{\textrm{ker }}
-\newcommand{\st}{\text{ s.t }}
-
-\usepackage{etoolbox}
-\patchcmd{\endproof}
-  {\popQED}
-  {\par\popQED}
-  {}
-  {}
-\renewcommand\qedsymbol{\setlength{\fboxsep}{2pt}\setlength{\fboxrule}{1pt}\fbox{\includegraphics[width=10pt]{images/crawleyDab.png}}}
-
 
 \newcommand{\docname}{Title}
-
 
 %Title and Header setup
 \title{FTC Programming Guide} % IMPORTANT: Change the title as needed
