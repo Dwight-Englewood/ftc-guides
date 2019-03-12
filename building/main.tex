@@ -1,0 +1,188 @@
+\documentclass[12pt,reqno]{amsart}
+
+%Below are some necessary packages for your course.
+\usepackage{amsfonts,latexsym,amsthm,amssymb,amsmath,amscd,euscript}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{framed}
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{lipsum}
+\usepackage{bold-extra}
+\usepackage{fancyhdr}
+\usepackage{subfiles}
+\usepackage{calc}
+\usepackage{tikz}
+\usepackage[reftex]{theoremref}
+\usetikzlibrary{shapes, arrows}
+\usetikzlibrary{shapes.geometric}
+
+
+\usepackage{float}
+
+
+\usepackage[margin=1in,heightrounded]{geometry}
+\geometry{headsep=33pt}
+\geometry{foot=33pt}
+
+%Color setup for table of contents
+\hypersetup{colorlinks=true,citecolor=blue,urlcolor =black,linkbordercolor={1 0 0}}
+
+%Define a bunch of useful colors
+\definecolor{bluepigment}{rgb}{0.2, 0.2, 0.6}
+\definecolor{cobalt}{rgb}{0.0, 0.28, 0.67}
+\definecolor{darkpowderblue}{rgb}{0.0, 0.2, 0.6}
+\definecolor{egyptianblue}{rgb}{0.06, 0.2, 0.65}
+\definecolor{lapislazuli}{rgb}{0.15, 0.38, 0.61}
+\definecolor{tealblue}{rgb}{0.21, 0.46, 0.53}
+\definecolor{darktealblue}{rgb}{0.11, 0.36, 0.43}
+\definecolor{zaffre}{rgb}{0.0, 0.08, 0.66}
+\definecolor{arsenic}{rgb}{0.23, 0.27, 0.29}
+\definecolor{bulgarianrose}{rgb}{0.28, 0.02, 0.03}
+\definecolor{aurometalsaurus}{rgb}{0.43, 0.5, 0.5}
+
+% Not sure what this does but it looks important
+\allowdisplaybreaks[1]
+
+%Allows for following patches
+\usepackage{etoolbox}
+
+\makeatletter
+%Patching maketitle to insert a date
+%Source unknown, somewhere on stack overflow
+\patchcmd{\@maketitle}
+  {\ifx\@empty\@dedicatory}
+  {\ifx\@empty\@date \else {\vskip3ex \centering\footnotesize\@date\par\vskip1ex}\fi
+   \ifx\@empty\@dedicatory}
+  {}{}
+\patchcmd{\@adminfootnotes}
+  {\ifx\@empty\@date\else \@footnotetext{\@setdate}\fi}
+  {}{}{}
+
+%defining section to have custom formatting
+%Original is 
+%\def\section{\@startsection{section}{1}%
+  %\z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
+  %{\normalfont\scshape\centering}}
+%\def\subsection{\@startsection{subsection}{2}%
+  %\z@{.5\linespacing\@plus.7\linespacing}{-.5em}%
+  %{\normalfont\bfseries}}
+%\def\subsubsection{\@startsection{subsubsection}{3}%
+  %\z@{.5\linespacing\@plus.7\linespacing}{-.5em}%
+  %{\normalfont\itshape}}
+%Explanation of \@startsection is at http://infohost.nmt.edu/tcc/help/pubs/nmtthesis/old/annotated/at.startsection.html
+
+\def\section{\@startsection{section}{1}%
+  \z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
+  {\normalfont\Large\bfseries}}%{\normalfont\Large\bfseries\scshape\centering}} % full range of options tested
+\def\subsection{\@startsection{subsection}{2}%
+  \z@{.5\linespacing\@plus.7\linespacing}{.5\linespacing}%
+  {\normalfont\large\bfseries}}
+\def\subsubsection{\@startsection{subsubsection}{3}%
+  \z@{.5\linespacing\@plus.7\linespacing}{.5\linespacing}%
+  {\normalfont\bfseries}}
+% the following is with thanks to https://tex.stackexchange.com/questions/51760/table-of-contents-with-indents-and-dots
+\def\@tocline#1#2#3#4#5#6#7{\relax
+  \ifnum #1>\c@tocdepth % then omit
+  \else
+    \par \addpenalty\@secpenalty\addvspace{#2}%
+    \begingroup \hyphenpenalty\@M
+    \@ifempty{#4}{%
+      \@tempdima\csname r@tocindent\number#1\endcsname\relax
+    }{%
+      \@tempdima#4\relax
+    }%
+    \parindent\z@ \leftskip#3\relax \advance\leftskip\@tempdima\relax
+    \rightskip\@pnumwidth plus4em \parfillskip-\@pnumwidth
+    #5\leavevmode\hskip-\@tempdima
+      \ifcase #1
+       \or\or \hskip 1em \or \hskip 2em \else \hskip 3em \fi%
+      #6\nobreak\relax
+    \dotfill\hbox to\@pnumwidth{\@tocpagenum{#7}}\par
+    \nobreak
+    \endgroup
+  \fi}
+\makeatother
+%Below are the theorem, definition, example, lemma, etc. body types.
+
+% Create some custom enviornments, with colors.
+\newenvironment{statement}[1]{\color{zaffre} \setcounter{justification}{0}\setcounter{equation}{0}\begin{exercise}[#1]}{\color[rgb]{0,0,0}\end{exercise}}
+\newenvironment{theorem_blue}{\color{zaffre}\begin{theorem}}{\color[rgb]{0,0,0}\end{theorem}}
+\newenvironment{just_c}{\color{aurometalsaurus}\begin{justification}}{\color[rgb]{0,0,0}\end{justification}}
+\newenvironment{defn_c}{\color{darktealblue}\begin{defn}}{\color[rgb]{0,0,0}\end{defn}}
+\newenvironment{uf}{\color{OliveGreen}\begin{usefulfacts}}{\color[rgb]{0,0,0}\end{usefulfacts}}
+\newenvironment{solution}{~\newline\textit{Solution.}}{}
+
+%Math 55 Originals
+\newtheoremstyle{break}
+  {\topsep}{\topsep}%
+  {}{}%
+  {\bfseries}{}%
+  {\newline}{}%
+\theoremstyle{break}
+\newtheorem{justification}{Justification}
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{exercise}{Exercise}[subsection]
+\newtheorem*{proposition}{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{postulate}[theorem]{Postulate}
+\newtheorem{usefulfacts}[theorem]{Useful Facts}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem*{notation}{Notation}
+\newtheorem*{note}{Note}
+
+% Shortcuts for common blackboard letters and such that, for inside math mode
+\newcommand{\BR}{\mathbb R}
+\newcommand{\BC}{\mathbb C}
+\newcommand{\BF}{\mathbb F}
+\newcommand{\BQ}{\mathbb Q}
+\newcommand{\BZ}{\mathbb Z}
+\newcommand{\BN}{\mathbb N}
+\newcommand{\kernel}{\textrm{ker }}
+\newcommand{\st}{\text{ s.t }}
+
+\usepackage{etoolbox}
+\patchcmd{\endproof}
+  {\popQED}
+  {\par\popQED}
+  {}
+  {}
+\renewcommand\qedsymbol{\setlength{\fboxsep}{2pt}\setlength{\fboxrule}{1pt}\fbox{\includegraphics[width=10pt]{images/crawleyDab.png}}}
+
+
+\newcommand{\docname}{Title}
+
+
+%Title and Header setup
+\title{Title} % IMPORTANT: Change the title as needed
+\date{\today}
+\pagestyle{fancy}
+\lhead{Left Header}
+\rhead{\thesubsection} % \thesubsection prints the current section
+\setlength{\headheight}{14pt}
+
+\raggedbottom
+\begin{document}
+% set color of links for table of contents
+\hypersetup{linkcolor=lapislazuli}
+
+%Title Page Setup
+\maketitle
+\thispagestyle{fancy}
+\vspace*{-0.25in}
+\centerline{Author}
+\vspace*{0.15in}
+\setcounter{tocdepth}{3}
+\tableofcontents
+\newpage
+
+%Begin the stuff!
+%Can type normal LaTeX here, or include subfiles
+\subfile{subfile/subfile.tex}
+\end{document}
