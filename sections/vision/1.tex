@@ -93,11 +93,15 @@ This is a fairly standard step, especially useful for the gold mineral as can be
     \includegraphics[width=400pt]{sections/vision/images/opencv/gold_pipeline_blur.png}
     \caption{Comparison of Pre-Blur to Post-Blur image}
 \end{figure}
+
+The next step is the ``meat and potatoes'' of the algorithm. Experimentally, we determine the range in which the color values of the gold mineral lay. Once this range is found, we perform a threshold on the image, selecting pixels which lie in that range exactly. 
 \begin{figure}[H]
     \centering
     \includegraphics[width=400pt]{sections/vision/images/opencv/gold_pipeline_threshold.png}
     \caption{Comparison of Source to thresholded image}
 \end{figure}
+
+Once we have that binary image, we can run either contour detection, or blob detection. We personally recommend contours - they are faster, as well as more robust dude to the tendency of blobs to detect only blobbish objects. In this specific image, both work. However, other images in testing did not work with blobs.
 \begin{figure}[H]
     \centering
     \includegraphics[width=400pt]{sections/vision/images/opencv/gold_pipeline_contour.png}
@@ -108,6 +112,8 @@ This is a fairly standard step, especially useful for the gold mineral as can be
     \includegraphics[width=400pt]{sections/vision/images/opencv/gold_pipeline_blob.png}
     \caption{Comparison of Source to Identified Blobs}
 \end{figure}
+
+The pipeline described above can work for a wide variety of objects. The jewels in Relic Recovery could be found in a very similar way. This pipeline is useful for identifying a small object from an image, with a uniform color across the object. When developing these types of pipelines, blurring and thresholding are very easy to mess around with to increase the efficacy of the algorithm.
 \subsubsection{Silver Mineral Location Detection in the Crater in Rover Ruckus}
 In this section, we will explore a OpenCV pipeline that can identify the location of silver minerals in the crater. The important note here is that the minerals are very close together, which is different from the sampling pipeline.
 \begin{figure}[H]
