@@ -15,6 +15,7 @@ We have previously discussed various sensors. However, the limitation inherent w
 \section{Vuforia}
 \section{PixyCam}
 \begin{figure}[H]
+    \centering
     \includegraphics{sections/vision/images/pixy.png}
     \caption{A PixyCam, so you know what it looks like.}
 \end{figure}
@@ -30,6 +31,7 @@ We do not have example code for using a PixyCam, since we have never used it on 
 \section{Tensorflow}
 Tensorflow is an interesting vision system. The premise is this; there is some neural network trained to identify different pieces present in the game. This was first done in the Rover Ruckus season, as since I am currently writing this while that season takes place, I don't know whether it will be done again, as FTC trained the model to detect the minerals themselves. It is something you could do yourself, see subsection 3.6 DIY Neural Network. 
 \begin{figure}[H]
+    \centering
     \includegraphics[width=400pt]{sections/vision/images/tensorflowOutput.png}
     \caption{Sample output of the Tensorflow. Each object that it believes to be a trained object, in this case the minerals, is boxed. Next to each box is a number, representing how confident the neural network is that the box is a mineral. In the FTC SDK, methods for getting the location of the box, confidence, and type of identified object the box contains are exposed}
 \end{figure}
@@ -49,9 +51,91 @@ The specific algorithm you will have to use is called YOLO object detection. In 
 The first part of this method is to find find and annotate your dataset. Look around the internet or take some pictures and start to gather a dataset. Once you have your data, you have to start annotating. In order to annotate these images, you will need to use LabelImg. LabelImg makes the annotations in a way that the neural network can understand it (a.k.a. makes xml files). You can find LabelImg  \href{https://github.com/tzutalin/labelImg}{here}.
 
 \begin{figure}[H]
+    \centering
     \includegraphics[width=400pt]{sections/vision/images/LabelImg.png}
     \caption{Sample screencap of labelling the images.}
 \end{figure}
 
 \section{OpenCV}
+\subsection{Overview}
+Computer Vision is the field of getting data from images that a computer can use. While the aforementioned TensorFlow does count in this regard as Computer Vision, typically Computer Vision refers to more direct algorithms - not trained neural nets. OpenCV is a collection of the various algorithms people have developed for various languages, including java. OpenCV allows for a much more flexible method of detecting and classifying objects in an FTC game.
+
+The algorithms, or operations, provided by OpenCV can be chained together into a pipeline. To this pipeline an image is fed in, and out some information about that image is returned. Thus, when developing an OpenCV pipeline, one will first want to experiment with different operations to perform the desired action.
+\subsection{GRIP}
+Provided by WPI and found at \url{https://github.com/WPIRoboticsProjects/GRIP/}, GRIP is an extremely useful program for creating an OpenCV pipeline\footnote{A short tutorial on how to use GRIP can be found at \url{https://wpilib.screenstepslive.com/s/currentCS/m/vision/l/463566-introduction-to-grip}}.
+\subsection{Operations}
+\subsubsection{Image Resizing}
+\subsubsection{Color Converting}
+make sure to mention caveat about the HSV on phones
+\subsubsection{Blurring}
+\subsubsection{Erosion}
+\subsubsection{Dilation}
+\subsubsection{Color Thresholding}
+\subsubsection{Finding Contours}
+\subsubsection{Finding Blobs}
+\subsection{Example Pipelines}
+\subsubsection{Gold Mineral Location Detection for Sampling in Rover Ruckus}
+This pipeline is the (nearly) exact pipeline 207 used at NJ states in the Rover Ruckus season, with much success. First, a demonstration of the final product.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=400pt]{sections/vision/images/opencv/gold_grip_screenshot.png}
+    \caption{The white box is the location of the gold mineral the code can use. This is using a line detection algorithm, as the result from that is easier to see - contour gives a very faint line. The identified location is exactly the same, however. I have also forgone the resizing step since the images are then too small to see clearly.}
+\end{figure}
+So, having shown that it works for at least one case, let's go over how the pipeline was made and works. The first (omitted in the example) step is to resize the image. We do this because we do not need a whole lot of detailin our detection - we only really care about the two big mineral pixel areas. Thus, by resizing, we can speed up our identification, with no detriment to the algorithm efficacy. The next step is to convert the image color space to HSV. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=400pt]{sections/vision/images/opencv/gold_pipeline_cvtColor.png}
+    \caption{Comparison of RGB to HSV image}
+\end{figure}
+This is a fairly standard step, especially useful for the gold mineral as can be seen in the neon green color. The next step that we are going to perform is a blur. We do this to ensure that the edges are smoothed out. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=400pt]{sections/vision/images/opencv/gold_pipeline_blur.png}
+    \caption{Comparison of Pre-Blur to Post-Blur image}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=400pt]{sections/vision/images/opencv/gold_pipeline_threshold.png}
+    \caption{Comparison of Source to thresholded image}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=400pt]{sections/vision/images/opencv/gold_pipeline_contour.png}
+    \caption{Comparison of Source to Identified Contours. The contour line has been drawn over so you can actually see it}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=400pt]{sections/vision/images/opencv/gold_pipeline_blob.png}
+    \caption{Comparison of Source to Identified Blobs}
+\end{figure}
+\subsubsection{Silver Mineral Location Detection in the Crater in Rover Ruckus}
+In this section, we will explore a OpenCV pipeline that can identify the location of silver minerals in the crater. The important note here is that the minerals are very close together, which is different from the sampling pipeline.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=400pt]{sections/vision/images/opencv/crater_grip_screenshot.png}
+    \caption{Screenshot of the finalized pipeline, and the identified locations of the silver mineral}
+\end{figure}
+\subsubsection{Glyph Detection in the Pit for Relic Recovery}
+\subsection{Programming OpenCV}
+\subsubsection{DogeCV}
+\subsubsection{EnderCV}
+\subsubsection{Example Implementation}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}
