@@ -6,4 +6,7 @@ This is a heavy work in progress.
 
 If you contributed, make sure to add yourself here!
 
-
+## To Build
+* Use PDFLatex
+* You must also install the neccesary stuff for the `minted` passage for programming guide
+* Compile with the shell-escape option for programming guide
