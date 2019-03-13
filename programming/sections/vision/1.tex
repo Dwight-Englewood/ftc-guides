@@ -65,14 +65,58 @@ The algorithms, or operations, provided by OpenCV can be chained together into a
 Provided by WPI and found at \url{https://github.com/WPIRoboticsProjects/GRIP/}, GRIP is an extremely useful program for creating an OpenCV pipeline\footnote{A short tutorial on how to use GRIP can be found at \url{https://wpilib.screenstepslive.com/s/currentCS/m/vision/l/463566-introduction-to-grip}}.
 \subsection{Operations}
 \subsubsection{Image Resizing}
+This operation is pretty self explanatory. The input image from the phone is resized. There are a bunch of methods of interpolation - how the computer knows what colors to make the pixels in the new image - but you can keep this on the default, cubic, since it really doesn't have much of an effect\footnote{You typically end up messing up the image with a blur, erosion, or dilation, so any work the phone does to interpolate data will be destroyed.}. The importance of this step is to decrease the size of the image, allowing following operations to run must faster - if there is less image to look at, less time is needed.
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=200pt]{sections/vision/images/opencv/crawley/crawleyResize.png}
+    \caption{Resized picture of Crawley dabbing in GRIP}
+\end{figure}
 \subsubsection{Color Converting}
 make sure to mention caveat about the HSV on phones
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=200pt]{sections/vision/images/opencv/crawley/crawleyHSVTransform.png}
+    \caption{RGB Image of Crawley converted to HSV color space in GRIP}
+\end{figure}
+
 \subsubsection{Blurring}
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=200pt]{sections/vision/images/opencv/crawley/crawleyBlursMedianGaussianBox.png}
+    \caption{3 types of blurs (Median, Gaussian, Box, in that order) on Crawley}
+\end{figure}
+
 \subsubsection{Erosion}
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=200pt]{sections/vision/images/opencv/crawley/crawleyErode.png}
+    \caption{Heavily eroded image of Crawley}
+\end{figure}
+
 \subsubsection{Dilation}
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=200pt]{sections/vision/images/opencv/crawley/crawleyDilate.png}
+    \caption{Heavily dilated image of Crawley}
+\end{figure}
 \subsubsection{Color Thresholding}
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=200pt]{sections/vision/images/opencv/crawley/crawleyRandomThreshold.png}
+    \caption{Meaningless thresholding of image of Crawley}
+\end{figure}
 \subsubsection{Finding Contours}
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=200pt]{sections/vision/images/opencv/crawley/crawleyContour.png}
+    \caption{Various contours in another pretty meaningless thresholding of the image of Crawley}
+\end{figure}
 \subsubsection{Finding Blobs}
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=200pt]{sections/vision/images/opencv/crawley/crawleyBlob.png}
+    \caption{Failed attempt at finding blobs in an image that is not properly thresholded for finding blobs}
+\end{figure}
 \subsection{Example Pipelines}
 \subsubsection{Gold Mineral Location Detection for Sampling in Rover Ruckus}
 This pipeline is the (nearly) exact pipeline 207 used at NJ states in the Rover Ruckus season, with much success. First, a demonstration of the final product.
