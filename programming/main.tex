@@ -3,6 +3,7 @@
 %Below are some necessary packages for your course.
 \usepackage{amsfonts,latexsym,amsthm,amssymb,amsmath,amscd,euscript}
 \usepackage[usenames,dvipsnames]{xcolor}
+
 \usepackage{framed}
 \usepackage{fullpage}
 \usepackage{hyperref}
@@ -36,27 +37,17 @@
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
- 
-\lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},   
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{magenta},
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\footnotesize,
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=5pt,                  
-    showspaces=false,                
-    showstringspaces=false,
-    showtabs=false,                  
-    tabsize=2
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  frame=single,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{blue}{$\hookrightarrow$}\space},
 }
- 
-\lstset{style=mystyle}
+
+\usepackage{minted}
+\usemintedstyle{autumn}
 
 \usepackage[margin=1in,heightrounded]{geometry}
 \geometry{headsep=33pt}
